@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>跟敲</title>
+        <link rel="stylesheet" href="todo.css">
+        <script src="../../vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <todo-component></todo-component>
+        </div>
+
+        <template id="container">
+            <div>
+                <todo-list
+                :is-editing="isEditing"
+                :item="item"
+                @into-editing="toggle"
+                v-for="item in todoList">
+                </todo-list>
+            </div>
+        </template>
+
+        <template id="todo">
+            <div class="wrapper">
+                <input type="checkbox" value="" class="my-checkbox">
+                <span v-if="isEditing">
+                    <input type="text" class="my-input">
+                </span>
+                <span v-else>
+                    <p @dblclick="$emit('into-editing')">{{ item }}</p>
+                </span>
+            </div>
+
+        </template>
+
+        <!-- -->
+        <script src="todo.js"></script>
+    </body>
+</html>

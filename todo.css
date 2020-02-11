@@ -1,0 +1,44 @@
+/*
+* 1. 输入框聚焦效果
+*
+*/
+body {
+    text-align: center;
+}
+
+.wrapper {
+    display: inline-block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px #ddd;
+}
+
+
+.my-checkbox {
+
+}
+
+span {
+    display: inline-block;
+    width: 450px;
+    line-height: 50px;
+    text-align: left;
+}
+
+p {
+    margin: 0;
+}
+
+.my-input {
+    border: none;
+    width: calc(100% - 30px);
+    padding: 15px;
+    font-size: 20px;
+
+}
+
+.my-input:focus {
+    outline-offset: unset;
+    outline: 1px solid #999;
+    /* box-shadow: inset 5px 5px #ddd; */
+}
