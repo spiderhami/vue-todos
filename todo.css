@@ -33,7 +33,8 @@ a {
 .p15 { padding: 15px; }
 .bb { border-bottom: 1px solid #ddd; }
 .ddd { color: #ddd; }
-
+.black { color: #000; }
+.vh { visibility: hidden; }
 .ct {
     display: flex;
     justify-content: center;
@@ -79,6 +80,11 @@ div#app {
     word-break: break-all;
 }
 
+.done {
+    text-decoration: line-through;
+    color: #ddd;
+}
+
 /* 单事项删除符 */
 .delete {
     color: rgba(255, 0, 0, 0.5);
@@ -92,11 +98,16 @@ div#app {
 }
 
 footer {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     padding: 10px 15px;
     font-size: 14px;
     color: #666;
+}
+
+.f1 {
+    position: absolute;
+    top: 10px;
+    left: 15px;
 }
 
 a:link, a:visited, a:hover, a:focus, a:active {
@@ -114,6 +125,11 @@ a:link, a:visited, a:hover, a:focus, a:active {
 }
 
 /* 删除所有“已完成”事项 */
+.clear {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
 .clear:hover {
     text-decoration: underline;
 }

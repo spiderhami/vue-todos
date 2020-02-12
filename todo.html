@@ -2,74 +2,58 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>跟敲</title>
+        <title>my todos</title>
         <link rel="stylesheet" href="todo.css">
         <script src="../../vue.js"></script>
     </head>
     <body>
         <div id="app">
-            <!-- <todo-component></todo-component> -->
-            <header class="df bb ddd">
-                <p class="wL ct">▼</p>
-                <div class="wR">
-                    <input class="my-input" type="text" placeholder="What needs to be done?">
-                </div>
-            </header>
-            <ul>
-                <li class="df bb">
-                    <div class="wL ct">
-                        <input class="" type="checkbox">
-                    </div>
-                    <div class="wR">
-                        <p class="my-p">
-                            good job
-                            <span class="delete">×</span>
-                        </p>
-                    </div>
-                </li>
-                <li class="df bb">
-                    <div class="wL ct">
-                        <input class="" type="checkbox">
-                    </div>
-                    <div class="wR">
-                        <input class="my-input edit" type="text">
-                    </div>
-                </li>
-            </ul>
-            <footer>
-                <span>0 items left</span>
-                <span>
-                    <a class="toggle" href="#">All</a>
-                    <a class="toggle" href="#">Active</a>
-                    <a class="toggle" href="#">Completed</a>
-                </span>
-                <a class="clear" href="#">Clear completed</a>
-            </footer>
+            <todo-component></todo-component>
         </div>
 
-        <!-- <template id="container">
+        <template id="container">
             <div>
-                <todo-list
-                :is-editing="isEditing"
-                :item="item"
-                @into-editing="toggle"
-                v-for="item in todoList">
-                </todo-list>
+                <header class="df bb ddd">
+                    <p @click="tickTodo" :class="tickClass" class="wL ct">▼</p>
+                    <div class="wR">
+                        <input v-model.trim="userInput" @keyup.enter="addTodo"
+                               class="my-input" type="text" placeholder="What needs to be done?">
+                    </div>
+                </header>
+                <ul>
+                    <li v-for="(todo, index) in todos"
+                        @mouseover="todoCurrent = todo"
+                        @mouseout="todoCurrent = {}"
+                        @dblclick="turnEdit(todo, $event)" class="df bb">
+                        <div class="wL ct">
+                            <input v-model="todosCompleted" :value="todo.id"
+                                   :class="{ vh: todo === todoEdit }" type="checkbox">
+                        </div>
+                        <div class="wR">
+                            <input v-if="todo === todoEdit"
+                                   v-model.trim="todo.name"
+                                   :class="[{ edit: todo === todoEdit }, 'my-input']"
+                                   @blur="todoEdit = {}"
+                                   v-focus
+                                   type="text" >
+                            <p v-else class="my-p">
+                                <span :class="{ done: todosCompleted.indexOf(todo.id) !== -1 }">{{ todo.name }}</span>
+                                <span v-show="todo === todoCurrent" @click="deleteTodo(todo, index)" class="delete">×</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <footer v-show="todos.length > 0" class="ct">
+                    <span class="f1">{{ leftCount }} items left</span>
+                    <span>
+                        <a class="toggle" href="#">All</a>
+                        <a class="toggle" href="#">Active</a>
+                        <a class="toggle" href="#">Completed</a>
+                    </span>
+                    <a v-show="todosCompleted.length > 0" @click.prevent="removeCompleted" class="clear" href="#">Clear completed</a>
+                </footer>
             </div>
         </template>
-
-        <template id="todo">
-            <div class="wrapper">
-                <input type="checkbox" value="" class="my-checkbox">
-                <span v-if="isEditing">
-                    <input type="text" class="my-input">
-                </span>
-                <span v-else>
-                    <p @dblclick="$emit('into-editing')">{{ item }}</p>
-                </span>
-            </div>
-
-        </template> -->
 
         <!--  -->
         <script src="todo.js"></script>
