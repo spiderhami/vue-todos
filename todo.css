@@ -1,44 +1,119 @@
 /*
+* To be done
 * 1. 输入框聚焦效果
 *
 */
-body {
-    text-align: center;
+
+/*
+* css reset
+*/
+p, ul, span {
+    margin: 0;
+    cursor: default;
 }
 
-.wrapper {
-    display: inline-block;
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*
+* css generic
+*/
+.wL { width: 50px; }
+.wR { width: 550px; }
+
+.df { display: flex; }
+.lh { line-height: 50px; }
+.f20 { font-size: 20px; }
+.p15 { padding: 15px; }
+.bb { border-bottom: 1px solid #ddd; }
+.ddd { color: #ddd; }
+
+.ct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+* css specific
+*/
+div#app {
+    width: 600px;
     margin: 0 auto;
     border: 1px solid #ddd;
     box-shadow: 0 0 5px #ddd;
 }
 
-
-.my-checkbox {
-
+::placeholder {
+    color: #ddd;
+    font-style: italic;
 }
 
-span {
-    display: inline-block;
-    width: 450px;
-    line-height: 50px;
-    text-align: left;
-}
-
-p {
-    margin: 0;
-}
-
+/* 自定义输入框 */
 .my-input {
-    border: none;
-    width: calc(100% - 30px);
     padding: 15px;
     font-size: 20px;
-
+    border: none;
+    width: calc(100% - 30px);
 }
 
 .my-input:focus {
     outline-offset: unset;
+    outline: 0;
+}
+
+.edit:focus {
     outline: 1px solid #999;
-    /* box-shadow: inset 5px 5px #ddd; */
+}
+
+/* todo事项文本框 */
+.my-p {
+    padding: 15px;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+/* 单事项删除符 */
+.delete {
+    color: rgba(255, 0, 0, 0.5);
+    font-size: 24px;
+    float: right;
+    transform: translateY(-2px);
+}
+
+.delete:hover {
+    color: red;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+a:link, a:visited, a:hover, a:focus, a:active {
+    color: #666;
+}
+
+.toggle {
+    margin-right: 10px;
+    padding: 3px 6px;
+}
+
+.toggle:focus,
+.toggle:hover {
+    outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+/* 删除所有“已完成”事项 */
+.clear:hover {
+    text-decoration: underline;
 }

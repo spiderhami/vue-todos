@@ -8,10 +8,46 @@
     </head>
     <body>
         <div id="app">
-            <todo-component></todo-component>
+            <!-- <todo-component></todo-component> -->
+            <header class="df bb ddd">
+                <p class="wL ct">▼</p>
+                <div class="wR">
+                    <input class="my-input" type="text" placeholder="What needs to be done?">
+                </div>
+            </header>
+            <ul>
+                <li class="df bb">
+                    <div class="wL ct">
+                        <input class="" type="checkbox">
+                    </div>
+                    <div class="wR">
+                        <p class="my-p">
+                            good job
+                            <span class="delete">×</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="df bb">
+                    <div class="wL ct">
+                        <input class="" type="checkbox">
+                    </div>
+                    <div class="wR">
+                        <input class="my-input edit" type="text">
+                    </div>
+                </li>
+            </ul>
+            <footer>
+                <span>0 items left</span>
+                <span>
+                    <a class="toggle" href="#">All</a>
+                    <a class="toggle" href="#">Active</a>
+                    <a class="toggle" href="#">Completed</a>
+                </span>
+                <a class="clear" href="#">Clear completed</a>
+            </footer>
         </div>
 
-        <template id="container">
+        <!-- <template id="container">
             <div>
                 <todo-list
                 :is-editing="isEditing"
@@ -33,9 +69,9 @@
                 </span>
             </div>
 
-        </template>
+        </template> -->
 
-        <!-- -->
+        <!--  -->
         <script src="todo.js"></script>
     </body>
 </html>
