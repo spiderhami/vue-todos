@@ -7,50 +7,93 @@
         <script src="../../vue.js"></script>
     </head>
     <body>
+        <h1>todos</h1>
         <div id="app">
             <todo-component></todo-component>
         </div>
 
         <template id="container">
             <div>
+                <!-- 用户输入栏，新增todo -->
                 <header class="df bb ddd">
-                    <p @click="tickTodo" :class="tickClass" class="wL ct">▼</p>
+                    <!-- 全选 -->
+                    <p @click="tickTodo"
+                       :class="tickClass"
+                       class="wL ct">▼</p>
                     <div class="wR">
-                        <input v-model.trim="userInput" @keyup.enter="addTodo"
-                               class="my-input" type="text" placeholder="What needs to be done?">
+                        <input v-model.trim="userInput"
+                               @keyup.enter="addTodo"
+                               class="my-input"
+                               type="text"
+                               placeholder="What needs to be done?">
                     </div>
                 </header>
+                <!-- todo列表 -->
                 <ul>
                     <li v-for="(todo, index) in todos"
                         @mouseover="todoCurrent = todo"
                         @mouseout="todoCurrent = {}"
-                        @dblclick="turnEdit(todo, $event)" class="df bb">
+                        @dblclick="turnEdit(todo, $event)"
+                        :class="{ dn: displayOrNot(todo) }"
+                        class="df bb">
                         <div class="wL ct">
-                            <input v-model="todosCompleted" :value="todo.id"
-                                   :class="{ vh: todo === todoEdit }" type="checkbox">
+                            <!-- vh: 可见性为隐藏 -->
+                            <input v-model="todosCompleted"
+                                   :value="todo.id"
+                                   :class="{ vh: todo === todoEdit }"
+                                   type="checkbox">
                         </div>
                         <div class="wR">
                             <input v-if="todo === todoEdit"
                                    v-model.trim="todo.name"
                                    :class="[{ edit: todo === todoEdit }, 'my-input']"
                                    @blur="todoEdit = {}"
+                                   @keyup.enter="todoEdit = {}"
                                    v-focus
                                    type="text" >
+
                             <p v-else class="my-p">
-                                <span :class="{ done: todosCompleted.indexOf(todo.id) !== -1 }">{{ todo.name }}</span>
-                                <span v-show="todo === todoCurrent" @click="deleteTodo(todo, index)" class="delete">×</span>
+                                <!-- done: 已完成todo的修饰效果 -->
+                                <span :class="{ done: todosCompleted.indexOf(todo.id) !== -1 }">
+                                    {{ todo.name }}
+                                </span>
+                                <span v-show="todo === todoCurrent"
+                                      @click="deleteTodo(todo, index)"
+                                      class="delete">
+                                      ×
+                                </span>
                             </p>
                         </div>
                     </li>
                 </ul>
-                <footer v-show="todos.length > 0" class="ct">
-                    <span class="f1">{{ leftCount }} items left</span>
-                    <span>
-                        <a class="toggle" href="#">All</a>
-                        <a class="toggle" href="#">Active</a>
-                        <a class="toggle" href="#">Completed</a>
+                <!-- 底部状态栏 -->
+                <footer v-show="todos.length" class="ct">
+                    <span class="f1">
+                        {{ leftCount }} items left
                     </span>
-                    <a v-show="todosCompleted.length > 0" @click.prevent="removeCompleted" class="clear" href="#">Clear completed</a>
+                    <span>
+                        <!-- out: 选中时的outline效果；初始显示“all”类别 -->
+                        <a @click="group = 'all'"
+                           :class="[{ out: group === 'all' }, 'toggle']"
+                           href="#">
+                           All
+                        </a>
+                        <a @click="group = 'active'"
+                           class="toggle"
+                           href="#">
+                           Active
+                        </a>
+                        <a @click="group = 'completed'"
+                           class="toggle"
+                           href="#">
+                           Completed
+                        </a>
+                    </span>
+                    <a v-show="todosCompleted.length"
+                       @click.prevent="removeCompleted"
+                       class="clear" href="#">
+                       Clear completed
+                    </a>
                 </footer>
             </div>
         </template>
